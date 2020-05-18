@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheOrderOfThings", "TheOrderOfThings\TheOrderOfThings.csproj", "{A13BA6FA-E2BB-4430-A195-11B8D0D5C68B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A13BA6FA-E2BB-4430-A195-11B8D0D5C68B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13BA6FA-E2BB-4430-A195-11B8D0D5C68B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A13BA6FA-E2BB-4430-A195-11B8D0D5C68B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A13BA6FA-E2BB-4430-A195-11B8D0D5C68B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CD20B95-C3C0-488D-A464-127AE2863527}
+	EndGlobalSection
+EndGlobal
