@@ -24,22 +24,22 @@ namespace AllTheMaths
             Console.WriteLine("\n****** Now make the computer do some harder maths!");
 
             Console.Write("8043.52 minus 4.2 plus 23.0 divided by 56.0 times -76.13 is: ");
-            Console.WriteLine("???");
+            Console.WriteLine(8043.52 - 4.2 + 23.0 / 56.0 * -76.13);
 
             Console.Write("11111 modulus 3 minus 67 minus 1 plus 9 is: ");
-            Console.WriteLine("???");
+            Console.WriteLine(11111 % 3 - 67 - 1 + 9);
 
             Console.Write("44 minus 22 minus 11 minus 66 minus 88 minus 76 minus 11 minus 33 is : ");
-            Console.WriteLine("???");
+            Console.WriteLine(44 - 22 - 11 - 66 - 88 - 76 - 11 - 33);
 
             Console.Write("22 times 3 minus 1 plus 4 times 6 minus -9 is : ");
-            Console.WriteLine("???");
+            Console.WriteLine(22 * 3 - 1 + 4 * 6 - -9);
 
             Console.Write("Is 67 greater than 4 * 5? ");
-            Console.WriteLine("???");
+            Console.WriteLine(67 > 4 * 5);
 
             Console.Write("Is 78 less than than 4 * 5? ");
-            Console.WriteLine("???");
+            Console.WriteLine(78 < 4 * 5);
         }
     }
 }
