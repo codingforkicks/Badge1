@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoOrDoNot", "DoOrDoNot\DoOrDoNot.csproj", "{1E619885-6A41-46BE-B792-CA8A40240430}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E619885-6A41-46BE-B792-CA8A40240430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E619885-6A41-46BE-B792-CA8A40240430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E619885-6A41-46BE-B792-CA8A40240430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E619885-6A41-46BE-B792-CA8A40240430}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6C28740-378A-4990-93EE-0C2050AD7F33}
+	EndGlobalSection
+EndGlobal
