@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace SWG_Warmups.BLL
 {
@@ -63,7 +64,7 @@ namespace SWG_Warmups.BLL
 
             //create name pairs
             int length = 2;
-            string firstPair = firstName.Substring(0, 2).ToLower();
+            string firstPair = firstName.Substring(0, length).ToLower();
             string endPair = firstName.Substring(firstName.Length-2, length).ToLower();
 
             //if pairs match remove first, last, or both
@@ -90,7 +91,36 @@ namespace SWG_Warmups.BLL
         //last letters (unless the letter is 'l' or 'e') from the name.
         public string QualityAssurance (string firstName)
         {
-            throw new NotImplementedException();
+            //if name is too short bypass test
+            if (firstName.Length < 2)
+            {
+                return firstName;
+            }
+
+            //create name pairs
+            int length = 2;
+            string firstPair = firstName.Substring(0, length).ToLower();
+            string endPair = firstName.Substring(firstName.Length - 2, length).ToLower();
+
+            // safe letters
+            char safeFirstLetter = 'a';
+            char[] safeLastLetters = { 'l', 'e' };
+
+            //if pairs match remove first, last, or both
+            if (!firstPair.Contains(safeFirstLetter) && firstPair[0] == firstPair[1])
+            {
+                if (endPair.IndexOfAny(safeLastLetters) > 0 && endPair[0] == endPair[1])
+                {
+                    string name = firstName.Remove(0, 1);
+                    return name.Remove(name.Length - 1);
+                }
+                return firstName.Remove(0, 1);
+            }
+            if (endPair.IndexOfAny(safeLastLetters) > 0 && endPair[0] == endPair[1])
+            {
+                return firstName.Remove(firstName.Length - 1);
+            }
+            return firstName;
         }
 
         //So some of our barista's liked to start throwing bad words into customer’s names (and say that is what the customer told them 
@@ -99,7 +129,22 @@ namespace SWG_Warmups.BLL
         //Given a person’s name, remove any instances of the phrase “bad” and return the name. (Note, a person’s name can be less than 3 letters)
         public string NoBadWords (string firstName)
         {
-            throw new NotImplementedException();
+            string phraseToRemove = "bad";
+
+            //if name is short bypass
+            if(firstName.Length < 3)
+            {
+                return firstName;
+            }
+
+            //remove bad
+            if (firstName.Contains(phraseToRemove))
+            {
+                //find start of bad.  Remove the starting index "b" to phrase length "ad"
+                int indexToRemove = firstName.IndexOf(phraseToRemove);
+                return firstName.Remove(indexToRemove, phraseToRemove.Length);
+            }
+            return firstName;
         }
 
         //For April Fool’s Day we decide to run a promotion where the label that prints off for the customer’s cup blows 
@@ -109,7 +154,25 @@ namespace SWG_Warmups.BLL
         //Given a person’s name, expand the string like in the example. (See the unit tests for more examples)
         public string FunnyNameDay(string firstName)
         {
-            throw new NotImplementedException();
+
+            //create temporary storage for values
+            string[] tempArry = new string [firstName.Length];
+
+            //store temp name strings
+            for(int i = 0; i < firstName.Length; i++)
+            {
+                tempArry[i] = firstName.Substring(0, i);
+            }
+
+            //build new name string
+            StringBuilder builder = new StringBuilder();
+            foreach (string value in tempArry)
+            {
+                builder.Append(value);
+            }
+
+            //return holiday name + firstName
+            return builder.ToString() + firstName;
         }
 
         //On every receipt we give the customer a phone number to go fill out a survey and they press a number (1-10) to 
@@ -119,8 +182,16 @@ namespace SWG_Warmups.BLL
         //Given an array of integers, return the number of times an 8 or higher appears.
         public int CustomerSurvey(int[] surveyResults)
         {
-            throw new NotImplementedException();
+            int responseCount = 0;
 
+            foreach(int value in surveyResults)
+            {
+                if(value >= 8)
+                {
+                    responseCount++;
+                }
+            }
+            return responseCount;
         }
 
         //Each day our managers want us to report to them the average score of all completed surveys for a day and let them know 
@@ -129,7 +200,17 @@ namespace SWG_Warmups.BLL
         //Given an array of integers, return true if the average satisfaction rating is greater than 8 or return false if it is not.
         public bool AreCustomersHappy(int[] surveyResults)
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            foreach(int value in surveyResults)
+            {
+                sum += value;
+            }
+            
+            if(sum/surveyResults.Length > 8)
+            {
+                return true;
+            }
+            return false;
         }
 
         //Our managers now want a weekend report giving us the average of both Saturday and Sunday’s surveys.
@@ -137,7 +218,17 @@ namespace SWG_Warmups.BLL
         //Given two arrays of integers, return the average rating of the two days.
         public double WeekendAverage(int[] saturdayResults, int[] sundayResults)
         {
-            throw new NotImplementedException();
+            //create sum variable and concate arrays into single array
+            int sum = 0;
+            int[] surveyResults = saturdayResults.Concat(sundayResults).ToArray();
+
+            //find and return average
+            foreach (int value in surveyResults)
+            {
+                sum += value;
+            }
+
+            return sum / surveyResults.Length;
         }
 
         //We take customer service very seriously. If more than 3 people gave us a score of 3 or less in a given day, 
@@ -146,7 +237,19 @@ namespace SWG_Warmups.BLL
         //Given an array of integers, return true if a score of 3 or less appears more than 3 times, or false if it does not.
         public bool TooMuchUnsatisfaction(int[] surveyResults)
         {
-            throw new NotImplementedException();
+            int count = 0;
+            foreach(int value in surveyResults)
+            {
+                if(value <= 3)
+                {
+                    count++;
+                }
+            }
+            if(count >= 3)
+            {
+                return true;
+            }
+            return false;
         }
 
         //One of the things a few of our customers commented on was the coffee did not taste fresh all the time. 
@@ -155,7 +258,11 @@ namespace SWG_Warmups.BLL
         //Given an hour, return a boolean on if we need to change the coffee or not.
         public bool FreshCoffee (int hourofDay)
         {
-            throw new NotImplementedException();
+            if(hourofDay % 2 == 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         //Our normal staffing needs for the day are 6 people. During the winter time, we need 2 additional people to help 
@@ -165,7 +272,16 @@ namespace SWG_Warmups.BLL
         //Given if it is the winter and if it is the weekend, return the number of staff we need.
         public int StaffingNeeds (bool isWinter, bool isWeekend)
         {
-            throw new NotImplementedException();
+            int staff = 6;
+            if (isWinter)
+            {
+                staff += 2;
+            }
+            if (isWeekend)
+            {
+                staff += 3;
+            }
+            return staff;
         }
 
         //If the store is closed, we do not answer the phone. If it is the morning time, we do not answer the phone because we are so busy. 
@@ -175,7 +291,11 @@ namespace SWG_Warmups.BLL
         //Given if the store is open, if it is the morning, and if it is the District Manager - determine if we should answer the phone or not.
         public bool PhoneSupport(bool isStoreOpen, bool isMorning, bool isDistrictManager)
         {
-            throw new NotImplementedException();
+            if (isDistrictManager || (isStoreOpen && !isMorning))
+            {
+                return true;
+            }
+            return false;
         }
 
         //We installed a new machine that allows our customers to put in dollars and coins to pay for their purchase. 
@@ -185,7 +305,18 @@ namespace SWG_Warmups.BLL
         //and number of pennies, return if we have been given enough money to make the purchase.
         public bool CashOnly(double itemPrice, int numberDollars, int numberQuarters, int numberDimes, int numberNickels, int numberPennies)
         {
-            throw new NotImplementedException();
+            double quarters = numberQuarters * .25;
+            double dimes = numberDimes * .10;
+            double nickles = numberNickels * .05;
+            double pennies = numberPennies * .01;
+
+            double total = numberDollars + quarters + dimes + nickles + pennies;
+
+            if(total >= itemPrice)
+            {
+                return true;
+            }
+            return false;
         }
 
         //Our customers have been getting bored while they wait for their coffee, so we have created a few fun little games 
@@ -197,7 +328,18 @@ namespace SWG_Warmups.BLL
         //the unknown letters as ‘-’ (minus sign)
         public string Hangman(string secretWord, char letterGuess)
         {
-            throw new NotImplementedException();
+            string answer = "";
+            foreach (char letter in secretWord)
+            {
+                if(letter == letterGuess)
+                {
+                    answer += letter;
+                } else
+                {
+                    answer += "-";
+                }
+            }
+            return answer;
         }
 
         //Hangman was such a hit they want us to add a new spin on it (literally). You will spin a wheel and get a point value. 
@@ -207,7 +349,22 @@ namespace SWG_Warmups.BLL
         //Given a target word, a letter guess by a customer, and a point value. Return the number of points earned.
         public int WheelofFortune(string secretWord, char letterGuess, int pointValue)
         {
-            throw new NotImplementedException();
+            //variable to track score and hold vowels
+            int score = 0;
+            char[] vowels = { 'a','e','i','o','u' };
+
+            //search through to see if guess is valuable
+            foreach (char letter in secretWord)
+            {
+                if (letter == letterGuess && vowels.Contains(letter))
+                {
+                    score += pointValue / 2;
+                } else if (letter == letterGuess)
+                {
+                    score += pointValue;
+                }
+            }
+            return score;
         }
 
         //Here at Software Guild Cafe, our labels for our cups are only so long so we want to limit the length of the names entered.
@@ -215,7 +372,9 @@ namespace SWG_Warmups.BLL
         //Given a name, and a maximum length the name can be (minimum 1), return if the name meets our requirements or not.
         public bool ValidateStringLength(string userEntry, int maxLength)
         {
-            throw new NotImplementedException();
+            if (userEntry.Length > 0 && userEntry.Length <= maxLength)
+                return true;
+            return false;
         }
 
         //Our software allows us to type in any character we want in the quantity field. While we will do a software update 
@@ -225,7 +384,8 @@ namespace SWG_Warmups.BLL
         //(Hint - Look Up Try Parse Methods)
         public bool ValidateInteger(string userEntry)
         {
-            throw new NotImplementedException();
+            int result;
+            return int.TryParse(userEntry, out result);
         }
 
         //We want to be sure someone doesn’t fat finger a number when entering quantity, so we want to make sure 
@@ -234,7 +394,13 @@ namespace SWG_Warmups.BLL
         //Given a string and a maximum quantity (minimum 1), return if the number is within the allotted range.
         public bool ValidateIntegerinRange(string userEntry, int maxValue)
         {
-            throw new NotImplementedException();
+            int entryAsInt = 0;
+            if (int.TryParse(userEntry, out entryAsInt))
+            {
+                if(entryAsInt > 0 && entryAsInt <= maxValue)
+                    return true;
+            }
+            return false;
         }
 
         //In some cases we want to manually override the price of a product. But once again the user can type in whatever 
@@ -244,7 +410,10 @@ namespace SWG_Warmups.BLL
         //(Hint - Look Up Try Parse Methods)
         public bool ValidateDouble(string userEntry)
         {
-            throw new NotImplementedException();
+            double result = 0;
+            if (double.TryParse(userEntry, out result))
+                return true;
+            return false;
         }
 
         //We don’t want someone over-charging like crazy or giving away free things so we want to limit the maximum price of our items.
@@ -252,7 +421,13 @@ namespace SWG_Warmups.BLL
         //Given a string, maximum price, and minimum price, return if it is within range or not.
         public bool ValidateDoubleinRange(string userEntry, double minPrice, double maxPrice)
         {
-            throw new NotImplementedException();
+            double result = 0;
+            if (double.TryParse(userEntry, out result))
+            {
+                if (result >= minPrice && result <= maxPrice)
+                    return true;
+            }
+            return false;
         }
 
         //As a back-up to our touch screen system, the barista’s can enter a code to reference the specific items we have to offer. 
@@ -261,7 +436,16 @@ namespace SWG_Warmups.BLL
         //Given a string, return if this code is a valid item entry code. (ex A5, C10, Z99)
         public bool ValidateItemEntry(string userEntry)
         {
-            throw new NotImplementedException();
+            //if it can check that the code length is 3
+            if (userEntry.Length > 1 && userEntry.Length <= 3)
+            {
+            //check if second string can be converted to a number
+            bool isNumber = int.TryParse(userEntry.Substring(1, userEntry.Length -1), out int number);
+                //check if first character is a letter
+                if (Char.IsLetter(userEntry[0]) && isNumber)
+                    return true;
+            }
+            return false;
         }
 
         //Now that we have the entry item validated, we need to be sure its a valid item in our list.
@@ -269,7 +453,9 @@ namespace SWG_Warmups.BLL
         //Given a string selection from user and an array of valid item selections, return if this item is one we offer.
         public bool ValidateSelectionFromArray(string userEntry, string[] productSelections)
         {
-            throw new NotImplementedException();
+            if (productSelections.Contains(userEntry))
+                return true;
+            return false;
         }
     }
 }
