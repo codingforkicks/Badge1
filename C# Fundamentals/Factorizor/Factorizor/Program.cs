@@ -33,7 +33,7 @@ namespace Factorizor
             while(notValid){
                 Console.Write("Enter a number to factor: ");
                 string userInput = Console.ReadLine();
-                if(int.TryParse(userInput, out userInputNum)){
+                if(int.TryParse(userInput, out result)){
                     if(userInputNum > 0){
                         return userInputNum;
                     }
