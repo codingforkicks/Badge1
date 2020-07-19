@@ -32,7 +32,7 @@ namespace HealthyHearts
             const int MAX = 220;
             return MAX - age;
         }
-        //target heart rate
+        //target heart rate zone
         static int[] targetHeartRateZone(int rate)
         {
             const double MIN = .50;
