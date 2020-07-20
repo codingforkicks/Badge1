@@ -9,23 +9,25 @@ namespace Factorizor.BLL
 {
     public class PerfectChecker
     {
-        private bool isPerfect(int numToCheck)
+        public bool IsPerfect(int numToCheck)
         {
-            int sum = 1;
+            if (numToCheck <= 1)
+            {
+                return false;
+            }
+            int sum = 0;
             //find all divisors and add them
-            for (int i = 2; i * i <= numToCheck; i++)
+            for (int i = 1; i < numToCheck; i++)
             {
                 if (numToCheck % i == 0)
                 {
-                    if (i * i != numToCheck)
-                    {
-                        sum = sum + i + numToCheck / i;
-                    }
                     sum = sum + i;
                 }
             }
             // if sum == num then num is perfect. Return true.
-            if (sum == numToCheck && numToCheck != 1)
+
+            Console.WriteLine("sum: {0} number: {1}", sum, numToCheck);
+            if (sum == numToCheck)
             {
                 return true;
             }

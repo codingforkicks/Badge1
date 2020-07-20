@@ -9,8 +9,14 @@ namespace Factorizor.BLL
 {
     public class PrimeChecker
     {
-        private bool IsPrime(int numToCheck)
+        public bool IsPrime(int numToCheck)
         {
+
+            if(numToCheck < 1)
+            {
+                return false;
+            }
+
             int count = 0;
             for (int i = 1; i <= numToCheck; i++)
             {

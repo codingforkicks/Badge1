@@ -11,7 +11,7 @@ namespace Factorizor.BLL
     class FactorFinder
     {
 
-        private int[] _factors;
+        private int _factor;
         public static int Divides(int num, int potentalFactor)
         {
             return num % potentalFactor;

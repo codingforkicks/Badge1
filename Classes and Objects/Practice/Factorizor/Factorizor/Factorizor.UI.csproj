@@ -45,10 +45,17 @@
   <ItemGroup>
     <Compile Include="ConsoleInput.cs" />
     <Compile Include="ConsoleOutput.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Factorizor.BLL\Factorizor.BLL.csproj">
+      <Project>{e0e236aa-5d5b-4102-ae95-95ccc707d459}</Project>
+      <Name>Factorizor.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
