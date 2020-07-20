@@ -25,8 +25,6 @@ namespace Factorizor.BLL
                 }
             }
             // if sum == num then num is perfect. Return true.
-
-            Console.WriteLine("sum: {0} number: {1}", sum, numToCheck);
             if (sum == numToCheck)
             {
                 return true;
