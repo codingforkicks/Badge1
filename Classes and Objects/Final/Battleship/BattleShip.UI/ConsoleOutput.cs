@@ -10,7 +10,9 @@ namespace BattleShip.UI
     {
         public void Welcome()
         {
-            Console.WriteLine("Welcome to battle ship!");
+            Console.WriteLine("Welcome to battle ship!  Press any key to start");
+            Console.ReadKey();
         }
+
     }
 }
