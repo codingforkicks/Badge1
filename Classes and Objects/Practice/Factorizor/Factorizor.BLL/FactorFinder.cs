@@ -8,32 +8,33 @@ using System.Threading.Tasks;
 //returns an array containing the factors of a given number
 namespace Factorizor.BLL
 {
-    class FactorFinder
+    public class FactorFinder
     {
-
-        private int _factor;
-        public static int Divides(int num, int potentalFactor)
+        private static int Divides(int num, int potentalFactor)
         {
             return num % potentalFactor;
         }
-        private int[] FactorArray(int number)
+        public int[] FactorArray(int number)
         {
-            int[] factors = { 0 };
             
+            //if the number is not positive return null
             if (number < 1)
             {
-                return factors;
+                return null;
 
             }
 
-            factors[1] = 1;
+            //create an array to store the factors
+            int[] factors = {};
             
+            //loop through potential factors
             for (int i = 1; i <= number; i++)
             {
+                //if factor is found resize the array and add the factor to the array
                 if (Divides(number, i) == 0)
                 {
-                    Array.Resize(ref factors, factors.Length);
-                    factors[i] = i;
+                    Array.Resize(ref factors, factors.Length + 1);
+                    factors[factors.Length - 1] = i;
                 }
             }
             return factors;

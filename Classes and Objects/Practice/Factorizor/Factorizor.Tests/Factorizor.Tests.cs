@@ -36,5 +36,16 @@ namespace Factorizor.Tests
 
             Assert.AreEqual(expected, result);
         }
+
+        [TestCase(11, new int[] { 1, 11 })]
+        [TestCase(16, new int[] { 1, 2, 4, 8, 16 })]
+        [TestCase(-3, null)]
+        public void FactorFinderTests(int x,  int[] expected)
+        {
+            FactorFinder factors = new FactorFinder();
+            int[] result = factors.FactorArray(x);
+
+            Assert.AreEqual(expected, result);
+        }
     }
 }
