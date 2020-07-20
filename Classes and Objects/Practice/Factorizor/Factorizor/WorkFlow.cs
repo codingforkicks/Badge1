@@ -18,13 +18,12 @@ namespace Factorizor
             FactorFinder findFactors = new FactorFinder();
             int[] factors = findFactors.FactorArray(input);
 
-            PerfectChecker checkPerfect = new PerfectChecker();
-            bool isPerfect = checkPerfect.IsPerfect(input);
             PrimeChecker checkPrime = new PrimeChecker();
             bool isPrime = checkPrime.IsPrime(input);
+            PerfectChecker checkPerfect = new PerfectChecker();
+            bool isPerfect = checkPerfect.IsPerfect(input);
 
             ConsoleOutput.DisplayResults(input, factors, isPrime, isPerfect);
-
         }
     }
 }

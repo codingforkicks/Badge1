@@ -23,6 +23,7 @@ namespace Factorizor.BLL
                 {
                     sum = sum + i;
                 }
+                Console.WriteLine("index {0}, sum {1}", i, sum);
             }
             // if sum == num then num is perfect. Return true.
             if (sum == numToCheck)

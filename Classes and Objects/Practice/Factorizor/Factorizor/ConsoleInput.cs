@@ -10,7 +10,6 @@ namespace Factorizor
     {
         public static int GetUserInput()
         {
-            Console.Clear();
             int output;
             string input;
 
@@ -25,8 +24,7 @@ namespace Factorizor
                         return output;
                     }
                 }
-                Console.WriteLine("That was not a valid number! Press any key to continue...");
-                Console.ReadKey();
+                Console.WriteLine("That was not a valid whole number!");
             }
         }
     }
