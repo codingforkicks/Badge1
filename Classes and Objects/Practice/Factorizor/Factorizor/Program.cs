@@ -11,6 +11,8 @@ namespace Factorizor
     {
         static void Main(string[] args)
         {
+            WorkFlow factor = new WorkFlow();
+            factor.RunFactorFinder();
         }
     }
 }
