@@ -34,7 +34,7 @@ namespace BattleShip.UI
             PlaceShipRequest placementRequest = new PlaceShipRequest();
             int shipsPlaced = 0;
 
-            while (shipsPlaced <= 5)
+            while (shipsPlaced < 5)
             {
                 //populate ships on board for current player based on their input
                 //get ship type
@@ -53,9 +53,7 @@ namespace BattleShip.UI
                 ConsoleOutput.DisplayShipPlacementResult(response);
                 if(response == ShipPlacement.Ok)
                 {
-                    
                     shipsPlaced++;
-                    Console.WriteLine($"{shipsPlaced} ships placed");
                 }
             }
             Console.Clear();

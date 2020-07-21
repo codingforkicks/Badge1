@@ -41,6 +41,7 @@ namespace BattleShip.UI
                 Console.WriteLine("There is already a ship here. You can not overlap ships!");
             }else if (response == ShipPlacement.Ok)
             {
+                Console.Clear();
                 Console.WriteLine($"Ship placed successfully");
             }
         }
@@ -50,7 +51,8 @@ namespace BattleShip.UI
         {
             if(response.ShotStatus == ShotStatus.Invalid)
             {
-                Console.WriteLine("Coordinate not on board, please try again");
+                Console.WriteLine("Coordinate not on board, press any key to try again");
+                Console.ReadKey();
             } else if (response.ShotStatus == ShotStatus.Duplicate)
             {
                 Console.WriteLine("You've already shot there, please try again");

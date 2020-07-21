@@ -26,8 +26,9 @@ namespace BattleShip.UI
             }
             return playerlist[0];
         }
-        public Coordinate GetShotCoordinates()
+        public Coordinate GetShotCoordinates(string currentPlayer)
         {
+            ConsoleOutput.PlayerTurnPrompt(currentPlayer);
             while (true)
             {
                 string coordinates = ConsoleInput.GetCoordinates();
@@ -40,7 +41,7 @@ namespace BattleShip.UI
             }
         }
 
-        //Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.
+        /*Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.
         public void ShowGrid(Board playerBoard)
         {
             foreach(var shot in playerBoard.ShotHistory)
@@ -65,6 +66,7 @@ namespace BattleShip.UI
                 }
             }
         }
+        */
         /*
          * A player's turn is as follows:
         Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.
@@ -109,7 +111,7 @@ namespace BattleShip.UI
                 bool winnerFound = false;
                 while (winnerFound == false)
                 {
-                    //Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.
+                    /*Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.
                     if (currentPlayer == playerlist[0])
                     {
                         ShowGrid(player1Board);
@@ -118,9 +120,10 @@ namespace BattleShip.UI
                     {
                         ShowGrid(player2Board);
                     }
+                    */
 
                     //Prompt the user for a coordinate entry (ex: B10). Validate the entry; if valid, create a coordinate object, convert the letter to a number, and call the opponent board's FireShot() method.
-                    Coordinate shot = GetShotCoordinates();
+                    Coordinate shot = GetShotCoordinates(currentPlayer);
                     FireShotResponse response;
 
                     if (currentPlayer == playerlist[0])
@@ -143,9 +146,9 @@ namespace BattleShip.UI
                     //if the shot is not invalid and not a duplicate switch players
                     if (response.ShotStatus != ShotStatus.Invalid && response.ShotStatus != ShotStatus.Duplicate)
                     {
+                        Console.ReadKey();
                         Console.Clear();
                         currentPlayer = SwitchPlayer(currentPlayer, playerlist);
-                        ConsoleOutput.PlayerTurnPrompt(currentPlayer);
                     }
                 }
                 //ask if they would like to play again

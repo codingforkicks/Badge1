@@ -87,14 +87,14 @@ namespace BattleShip.UI
             string coordinates;
             while (true)
             {
-                Console.WriteLine("Enter Coordinates: ");
+                Console.WriteLine("\nEnter Coordinates: ");
                 coordinates = Console.ReadLine();
                 if (isValid(coordinates))
                 {
                     return coordinates;
                 } else
                 {
-                    //Console.Clear();
+                    Console.Clear();
                     Console.WriteLine($"{coordinates} is invalid!\n Coordinates must contain a letter A-J followed by a number 1-10\n\n");
                 }
 
@@ -105,7 +105,8 @@ namespace BattleShip.UI
         {
             while (true)
             {
-                Console.WriteLine("Enter Direction: ");
+                Console.WriteLine("\nEnter Direction: \n" +
+                    "0 Up\n1 Down\n2 Left\n3 Right\n");
                 if (Enum.TryParse(Console.ReadLine(), out ShipDirection direction))
                 {
                     Console.WriteLine($"direction: {direction}");
@@ -123,11 +124,11 @@ namespace BattleShip.UI
         {
             while (true)
             {
-                Console.WriteLine("Enter ShipType:\n" +
-                    "0 Destroyer, 1 Submarine, 2 Cruiser, 3 Battleship, 4 Carrier ");
+                Console.WriteLine("\nEnter ShipType:\n" +
+                    "0 Destroyer\n1 Submarine\n2 Cruiser\n3 Battleship\n4 Carrier");
                 if (Enum.TryParse(Console.ReadLine(), out ShipType ship))
                 {
-                    Console.WriteLine($"ship: {ship} selected");
+                    Console.WriteLine($"\nShip: {ship} selected");
                     return ship;
                 }
                 else
@@ -147,10 +148,11 @@ namespace BattleShip.UI
         }
         public static bool PlayAgain(string playerName)
         {
+            Console.Clear();
             Console.WriteLine($"{playerName} is Victorious!");
             while (true)
             {
-                Console.WriteLine("Would you like to play again?\n Enter yes or no");
+                Console.WriteLine("Would you like to play again?\nEnter yes or no");
                 string response = Console.ReadLine().ToLower();
                 if (isValidExitCommand(response.Trim(null)))
                 {
