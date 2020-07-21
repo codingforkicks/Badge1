@@ -140,13 +140,12 @@ namespace BattleShip.UI
 
                     if (response.ShotStatus == ShotStatus.Victory)
                     {
-                        winnerFound = true;   
+                        winnerFound = true;
                     }
                     
                     //if the shot is not invalid and not a duplicate switch players
                     if (response.ShotStatus != ShotStatus.Invalid && response.ShotStatus != ShotStatus.Duplicate)
                     {
-                        Console.ReadKey();
                         Console.Clear();
                         currentPlayer = SwitchPlayer(currentPlayer, playerlist);
                     }

@@ -106,7 +106,7 @@ namespace BattleShip.UI
             while (true)
             {
                 Console.WriteLine("\nEnter Direction: \n" +
-                    "0 Up\n1 Down\n2 Left\n3 Right\n");
+                    "0 Up\n1 Down\n2 Left\n3 Right");
                 if (Enum.TryParse(Console.ReadLine(), out ShipDirection direction))
                 {
                     Console.WriteLine($"direction: {direction}");

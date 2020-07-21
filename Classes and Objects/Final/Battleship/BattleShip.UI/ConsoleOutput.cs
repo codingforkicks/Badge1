@@ -26,8 +26,9 @@ namespace BattleShip.UI
         public static void PlayerTurnPrompt(string playerName)
         {
             Console.Clear();
-            Console.WriteLine($"Player {playerName}, press any key to start turn.");
-            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"Player {playerName}'s Turn");
+            Console.ResetColor();
         }
 
         //NotEnoughSpace, Overlap,Ok
@@ -56,18 +57,23 @@ namespace BattleShip.UI
             } else if (response.ShotStatus == ShotStatus.Duplicate)
             {
                 Console.WriteLine("You've already shot there, please try again");
+                Console.ReadKey();
             } else if (response.ShotStatus == ShotStatus.Miss)
             {
                 Console.WriteLine("You Missed!");
+                Console.ReadKey();
             } else if (response.ShotStatus == ShotStatus.Hit)
             {
                 Console.WriteLine("Their Battleship was hit!");
+                Console.ReadKey();
             } else if (response.ShotStatus == ShotStatus.HitAndSunk)
             {
                 Console.WriteLine("You Sunk their battleship!");
+                Console.ReadKey();
             } else if (response.ShotStatus == ShotStatus.Victory)
             {
                 Console.WriteLine("You Are Victorious!");
+                Console.ReadKey();
             }
         }
 
