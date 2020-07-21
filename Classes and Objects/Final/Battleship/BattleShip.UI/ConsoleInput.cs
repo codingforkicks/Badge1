@@ -24,13 +24,16 @@ namespace BattleShip.UI
 
             while (true)
             {
-                Console.WriteLine("Enter the name for Player {0}", playerCount);
+                Console.WriteLine("Enter a name for Player {0}: ", playerCount);
                 playerName = Console.ReadLine();
                 char firstLetter = playerName.ToCharArray().ElementAt(0);
                 if (char.IsLetter(firstLetter))
                 {
                     playerList[playerCount - 1] = playerName;
                     playerCount++;
+                }else
+                {
+                    Console.WriteLine("Error: Name must begin with a character");
                 }
                 if (playerList[1] != null)
                     return playerList;
@@ -50,7 +53,7 @@ namespace BattleShip.UI
             string row = coordinates.Substring(0, 1);
             string column = coordinates.Substring(1, coordinates.Length - 1);
             //check if first letter is A-J and following is 1-10
-            if (Regex.Matches(row, @"[a-j,A-J]").Count > 0)
+            if (Regex.Matches(row, @"[a-k,A-k]").Count > 0)
             {
                 if (Regex.Matches(column, @"[1-9]|10").Count > 0)
                 {
@@ -66,7 +69,7 @@ namespace BattleShip.UI
             string coordinates;
             while (true)
             {
-                Console.WriteLine("Enter Coordinates");
+                Console.WriteLine("Enter Coordinates: ");
                 coordinates = Console.ReadLine();
                 if (isValid(coordinates))
                 {
@@ -74,7 +77,7 @@ namespace BattleShip.UI
                 } else
                 {
                     Console.Clear();
-                    Console.WriteLine("Invalid Coordinates!\n Coordinates must contain a letter A-J followed by a number 1-10\n\n");
+                    Console.WriteLine($"{coordinates} is invalid!\n Coordinates must contain a letter A-J followed by a number 1-10\n\n");
                 }
 
             }

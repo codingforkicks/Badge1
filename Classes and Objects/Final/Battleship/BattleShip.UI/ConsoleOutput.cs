@@ -1,4 +1,5 @@
-﻿using BattleShip.BLL.Responses;
+﻿using BattleShip.BLL.Requests;
+using BattleShip.BLL.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +19,30 @@ namespace BattleShip.UI
         public static void PlayerStartPrompt(string playerName)
         {
             Console.Clear();
-            Console.WriteLine($"{playerName}, press any key to begin building your player board.");
+            Console.WriteLine($"Player {playerName}, press any key to begin building your player board.");
             Console.ReadKey();
         }
 
         public static void PlayerTurnPrompt(string playerName)
         {
             Console.Clear();
-            Console.WriteLine($"{playerName}, press any key to start turn.");
+            Console.WriteLine($"Player {playerName}, press any key to start turn.");
             Console.ReadKey();
+        }
+
+        //NotEnoughSpace, Overlap,Ok
+        public static void DisplayShipPlacementResult(ShipPlacement response, Coordinate coordinate)
+        {
+            if(response == ShipPlacement.NotEnoughSpace)
+            {
+                Console.WriteLine("There is not enough room to place this ship here.");
+            } else if (response == ShipPlacement.Overlap)
+            {
+                Console.WriteLine("There is already a ship here. You can not overlap ships!");
+            }else if (response == ShipPlacement.Ok)
+            {
+                Console.WriteLine($"Ship placed successfully");
+            }
         }
 
         //Invalid, Duplicate, Miss, Hit, HitAndSunk, Victory

@@ -69,6 +69,9 @@ namespace BattleShip.UI
                 {
                     ConsoleOutput.PlayerStartPrompt(playerlist[0]);
                     player1Board = player1.GameSetUp();
+
+                    Console.WriteLine(player1Board.ToString());
+                    Console.ReadKey();
                     ConsoleOutput.PlayerStartPrompt(playerlist[1]);
                     player2Board = player2.GameSetUp();
                 } else

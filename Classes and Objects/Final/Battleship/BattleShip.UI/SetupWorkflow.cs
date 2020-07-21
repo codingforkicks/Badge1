@@ -34,7 +34,7 @@ namespace BattleShip.UI
             PlaceShipRequest placementRequest = new PlaceShipRequest();
             int shipsPlaced = 0;
 
-            while (shipsPlaced < 3)
+            while (shipsPlaced <= 5)
             {
                 //populate ships on board for current player based on their input
                 //get ship type
@@ -42,25 +42,19 @@ namespace BattleShip.UI
                 //placementRequest.ShipType = ship;
 
                 //get coordinates
-                Coordinate userEntry = GetShipCoordinates();
-                placementRequest.Coordinate = userEntry;
+                Coordinate shipCoordinates = GetShipCoordinates();
+                placementRequest.Coordinate = shipCoordinates;
 
                 //get ship direction
                 ShipDirection direction = ConsoleInput.GetShipDirection();
                 placementRequest.Direction = direction;
 
-                Enum response = playerBoard.PlaceShip(placementRequest);
-                Console.WriteLine($"enum response {response}");
-
-                if (Enum.IsDefined(typeof(ShipPlacement), response))
+                ShipPlacement response = playerBoard.PlaceShip(placementRequest);
+                ConsoleOutput.DisplayShipPlacementResult(response, shipCoordinates);
+                if(response == ShipPlacement.Ok)
                 {
                     shipsPlaced++;
-                    Console.WriteLine($"{shipsPlaced} ships have been placed");
-                    Console.WriteLine($"enum response {response}");
-                }
-                else
-                {
-                    Console.WriteLine("Error: ship not placed");
+                    Console.WriteLine($"{shipsPlaced} ships placed");
                 }
             }
             Console.Clear();
