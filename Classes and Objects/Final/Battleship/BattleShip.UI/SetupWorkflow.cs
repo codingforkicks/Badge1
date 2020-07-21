@@ -38,8 +38,8 @@ namespace BattleShip.UI
             {
                 //populate ships on board for current player based on their input
                 //get ship type
-                //ShipType ship = ConsoleInput.GetShipType();
-                //placementRequest.ShipType = ship;
+                ShipType ship = ConsoleInput.GetShipType();
+                placementRequest.ShipType = ship;
 
                 //get coordinates
                 Coordinate shipCoordinates = GetShipCoordinates();
@@ -50,9 +50,10 @@ namespace BattleShip.UI
                 placementRequest.Direction = direction;
 
                 ShipPlacement response = playerBoard.PlaceShip(placementRequest);
-                ConsoleOutput.DisplayShipPlacementResult(response, shipCoordinates);
+                ConsoleOutput.DisplayShipPlacementResult(response);
                 if(response == ShipPlacement.Ok)
                 {
+                    
                     shipsPlaced++;
                     Console.WriteLine($"{shipsPlaced} ships placed");
                 }

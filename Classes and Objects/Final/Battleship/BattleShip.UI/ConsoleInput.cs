@@ -24,19 +24,29 @@ namespace BattleShip.UI
 
             while (true)
             {
-                Console.WriteLine("Enter a name for Player {0}: ", playerCount);
+                Console.Write("Enter a name for Player {0}: ", playerCount);
                 playerName = Console.ReadLine();
-                char firstLetter = playerName.ToCharArray().ElementAt(0);
-                if (char.IsLetter(firstLetter))
+                if(playerName.Length > 0)
                 {
-                    playerList[playerCount - 1] = playerName;
-                    playerCount++;
-                }else
-                {
-                    Console.WriteLine("Error: Name must begin with a character");
+                    char firstLetter = playerName.ToCharArray().ElementAt(0);
+                    if (char.IsLetter(firstLetter))
+                    {
+                        playerList[playerCount - 1] = playerName;
+                        playerCount++;
+                    } else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("\nError: Name must begin with a character");
+                    }
                 }
-                if (playerList[1] != null)
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nError: Name can not be blank");
+                }
+                if (playerList[1] != null) {
                     return playerList;
+                }
             }
         }
 
@@ -44,7 +54,7 @@ namespace BattleShip.UI
         public static bool isValid(string coordinates)
         {
             //check if length of input is correct length
-            if (coordinates.Length < 1 || coordinates.Length > 2)
+            if (coordinates.Length < 2 || coordinates.Length > 3)
             {
                 return false;
             }
@@ -52,12 +62,20 @@ namespace BattleShip.UI
             //grab first letter and subseqent input
             string row = coordinates.Substring(0, 1);
             string column = coordinates.Substring(1, coordinates.Length - 1);
-            //check if first letter is A-J and following is 1-10
-            if (Regex.Matches(row, @"[a-k,A-k]").Count > 0)
+           
+            //check if first letter is A-J and following is integer 1-10
+            if (Regex.Matches(row, @"[a-j,A-J]").Count > 0)
             {
                 if (Regex.Matches(column, @"[1-9]|10").Count > 0)
                 {
-                    return true;
+                    //regex only checks characters
+                    if (int.TryParse(column, out int num))
+                    {
+                        if(num <= 10)
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
             return false;
@@ -76,7 +94,7 @@ namespace BattleShip.UI
                     return coordinates;
                 } else
                 {
-                    Console.Clear();
+                    //Console.Clear();
                     Console.WriteLine($"{coordinates} is invalid!\n Coordinates must contain a letter A-J followed by a number 1-10\n\n");
                 }
 
@@ -105,10 +123,11 @@ namespace BattleShip.UI
         {
             while (true)
             {
-                Console.WriteLine("Enter ShipType: ");
+                Console.WriteLine("Enter ShipType:\n" +
+                    "0 Destroyer, 1 Submarine, 2 Cruiser, 3 Battleship, 4 Carrier ");
                 if (Enum.TryParse(Console.ReadLine(), out ShipType ship))
                 {
-                    Console.WriteLine($"ship: {ship}");
+                    Console.WriteLine($"ship: {ship} selected");
                     return ship;
                 }
                 else

@@ -12,7 +12,7 @@ namespace BattleShip.UI
     {
         public static void Welcome()
         {
-            Console.WriteLine("Welcome to battle ship!  Press any key to start");
+            Console.WriteLine("Welcome to battle ship!  Press any key to start!");
             Console.ReadKey();
         }
 
@@ -31,7 +31,7 @@ namespace BattleShip.UI
         }
 
         //NotEnoughSpace, Overlap,Ok
-        public static void DisplayShipPlacementResult(ShipPlacement response, Coordinate coordinate)
+        public static void DisplayShipPlacementResult(ShipPlacement response)
         {
             if(response == ShipPlacement.NotEnoughSpace)
             {
