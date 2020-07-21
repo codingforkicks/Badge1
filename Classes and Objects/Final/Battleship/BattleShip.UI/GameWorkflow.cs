@@ -15,7 +15,7 @@ namespace BattleShip.UI
         public int DetermineWhoStarts()
         {
             Random num = new Random();
-            return num.Next(0, 1);
+            return num.Next(0, 2);
         }
         public string SwitchPlayer(string currentPlayer, string[] playerlist)
         {
