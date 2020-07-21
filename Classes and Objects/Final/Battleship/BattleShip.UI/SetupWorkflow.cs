@@ -13,6 +13,19 @@ namespace BattleShip.UI
 {
     public class SetupWorkflow
     {
+        public Coordinate GetShipCoordinates()
+        {
+            while (true)
+            {
+                string coordinates = ConsoleInput.GetCoordinates();
+                char row = coordinates[0];
+                int column = int.Parse(coordinates.Remove(0, 1));
+                int letterToNumber = (int)row % 32;
+
+                Coordinate userEntry = new Coordinate(letterToNumber, column);
+                return userEntry;
+            }
+        }
         public Board GameSetUp()
         {
             //create board instance for current player
@@ -21,60 +34,33 @@ namespace BattleShip.UI
             PlaceShipRequest placementRequest = new PlaceShipRequest();
             int shipsPlaced = 0;
 
-            bool isDone = false;
-            //get ship type
-            while(isDone == false)
+            while (shipsPlaced < 3)
             {
-                Console.WriteLine("Enter ShipType: ");
-                if(Enum.TryParse(Console.ReadLine(), out ShipType ship))
+                //populate ships on board for current player based on their input
+                //get ship type
+                //ShipType ship = ConsoleInput.GetShipType();
+                //placementRequest.ShipType = ship;
+
+                //get coordinates
+                Coordinate userEntry = GetShipCoordinates();
+                placementRequest.Coordinate = userEntry;
+
+                //get ship direction
+                ShipDirection direction = ConsoleInput.GetShipDirection();
+                placementRequest.Direction = direction;
+
+                Enum response = playerBoard.PlaceShip(placementRequest);
+                if (Enum.IsDefined(typeof(ShipPlacement), response))
                 {
-                    Console.WriteLine($"ship: {ship}");
-                    placementRequest.ShipType = ship;
-                    isDone = true;
-                } else
-                {
-                    Console.WriteLine("That is not a valid ship type!");
-                }
-            }
-
-            isDone = false;
-            //populate ships on board for current player based on their input
-            //get coordinates
-            Console.WriteLine("Enter Ship Coordinates: ");
-            string coordinates = ConsoleInput.GetCoordinates();
-            char row = coordinates[0];
-            int column = int.Parse(coordinates.Remove(0, 1));
-            int letterToNumber = (int)row % 32;
-
-            Coordinate userEntry = new Coordinate(letterToNumber, column);
-            placementRequest.Coordinate = userEntry;
-
-
-            while (isDone == false)
-            {
-                Console.WriteLine("Enter Direction: ");
-                if (Enum.TryParse(Console.ReadLine(), out ShipDirection direction))
-                {
-                    Console.WriteLine($"direction: {direction}");
-                    placementRequest.Direction = direction;
-                    isDone = true;
+                    shipsPlaced++;
                 }
                 else
                 {
-                    Console.WriteLine("That is not a valid direction!");
+                    Console.WriteLine("Error: ship not placed");
                 }
             }
-
-            Enum response = playerBoard.PlaceShip(placementRequest);
-            if (Enum.IsDefined(ShipPlacement, response))
-            {
-                shipsPlaced++;
-            }
-
-            if(shipsPlaced >= 5)
-            {
-                return playerBoard;
-            }
+            Console.Clear();
+            return playerBoard;
         }
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 //add regex for simple validation
 using System.Text.RegularExpressions;
+//add requests for ship placement
+using BattleShip.BLL.Requests;
+using BattleShip.BLL.Ships;
 
 namespace BattleShip.UI
 {
@@ -63,7 +66,7 @@ namespace BattleShip.UI
             string coordinates;
             while (true)
             {
-                Console.WriteLine("Enter shot coordinates");
+                Console.WriteLine("Enter Coordinates");
                 coordinates = Console.ReadLine();
                 if (isValid(coordinates))
                 {
@@ -74,6 +77,73 @@ namespace BattleShip.UI
                     Console.WriteLine("Invalid Coordinates!\n Coordinates must contain a letter A-J followed by a number 1-10\n\n");
                 }
 
+            }
+        }
+
+        public static ShipDirection GetShipDirection()
+        {
+            while (true)
+            {
+                Console.WriteLine("Enter Direction: ");
+                if (Enum.TryParse(Console.ReadLine(), out ShipDirection direction))
+                {
+                    Console.WriteLine($"direction: {direction}");
+                    return direction;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine($"{direction} is not a valid direction!");
+                }
+            }
+        }
+
+        public static ShipType GetShipType()
+        {
+            while (true)
+            {
+                Console.WriteLine("Enter ShipType: ");
+                if (Enum.TryParse(Console.ReadLine(), out ShipType ship))
+                {
+                    Console.WriteLine($"ship: {ship}");
+                    return ship;
+                }
+                else
+                {
+                    Console.WriteLine("That is not a valid ship type!");
+                }
+            }
+        }
+
+        private static bool isValidExitCommand(string command)
+        {
+            if (command == "yes" || command == "no")
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool PlayAgain(int playerNum)
+        {
+            Console.WriteLine($"Player {playerNum} is Victorious.");
+            while (true)
+            {
+                Console.WriteLine("Would you like to play again?\n Enter yes or no");
+                string response = Console.ReadLine().ToLower();
+                if (isValidExitCommand(response.Trim(null)))
+                {
+                    if(response[0] == 'y')
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                } else
+                {
+                    Console.WriteLine("Invalid command. I didn't get that");
+                }
             }
         }
     }
