@@ -50,9 +50,13 @@ namespace BattleShip.UI
                 placementRequest.Direction = direction;
 
                 Enum response = playerBoard.PlaceShip(placementRequest);
+                Console.WriteLine($"enum response {response}");
+
                 if (Enum.IsDefined(typeof(ShipPlacement), response))
                 {
                     shipsPlaced++;
+                    Console.WriteLine($"{shipsPlaced} ships have been placed");
+                    Console.WriteLine($"enum response {response}");
                 }
                 else
                 {

@@ -15,15 +15,15 @@ namespace BattleShip.UI
         public int DetermineWhoStarts()
         {
             Random num = new Random();
-            return num.Next(1, 2);
+            return num.Next(0, 1);
         }
-        public int SwitchPlayer(int currentPlayerNumber)
+        public string SwitchPlayer(string currentPlayer, string[] playerlist)
         {
-            if(currentPlayerNumber == 1)
+            if(currentPlayer == playerlist[0])
             {
-                return 2;
+                return playerlist[1];
             }
-            return 1;
+            return playerlist[0];
         }
         public Coordinate GetShotCoordinates()
         {
@@ -55,7 +55,9 @@ namespace BattleShip.UI
 
             while (gameOver == false)
             {
-                int currentPlayer = DetermineWhoStarts();
+                string[] playerlist = ConsoleInput.GetPlayerNames();
+                int startingPlayer = DetermineWhoStarts();
+                string currentPlayer = playerlist[startingPlayer];
             
                 //run game setup
                 SetupWorkflow player1 = new SetupWorkflow();
@@ -63,15 +65,17 @@ namespace BattleShip.UI
                 Board player1Board;
                 Board player2Board;
 
-                //player prompt
-                ConsoleOutput.PlayerStartPrompt(currentPlayer);
-                if(currentPlayer == 1)
+                if(currentPlayer == playerlist[0])
                 {
+                    ConsoleOutput.PlayerStartPrompt(playerlist[0]);
                     player1Board = player1.GameSetUp();
+                    ConsoleOutput.PlayerStartPrompt(playerlist[1]);
                     player2Board = player2.GameSetUp();
                 } else
                 {
+                    ConsoleOutput.PlayerStartPrompt(playerlist[1]);
                     player2Board = player2.GameSetUp();
+                    ConsoleOutput.PlayerStartPrompt(playerlist[0]);
                     player1Board = player1.GameSetUp();
                 }
 
@@ -82,7 +86,7 @@ namespace BattleShip.UI
                     Coordinate shot = GetShotCoordinates();
                     FireShotResponse response;
 
-                    if (currentPlayer == 1)
+                    if (currentPlayer == playerlist[0])
                     {
                         response = player2Board.FireShot(shot);
                     }
@@ -103,7 +107,7 @@ namespace BattleShip.UI
                     if (response.ShotStatus != ShotStatus.Invalid && response.ShotStatus != ShotStatus.Duplicate)
                     {
                         Console.Clear();
-                        currentPlayer = SwitchPlayer(currentPlayer);
+                        currentPlayer = SwitchPlayer(currentPlayer, playerlist);
                         ConsoleOutput.PlayerTurnPrompt(currentPlayer);
                     }
                 }

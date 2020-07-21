@@ -16,7 +16,7 @@ namespace BattleShip.UI
     {
         //gets player names from user input
         //returns both player names in string array
-        public string[] GetPlayerNames()
+        public static string[] GetPlayerNames()
         {
             string playerName;
             string[] playerList = {null, null};
@@ -123,9 +123,9 @@ namespace BattleShip.UI
             }
             return false;
         }
-        public static bool PlayAgain(int playerNum)
+        public static bool PlayAgain(string playerName)
         {
-            Console.WriteLine($"Player {playerNum} is Victorious.");
+            Console.WriteLine($"{playerName} is Victorious!");
             while (true)
             {
                 Console.WriteLine("Would you like to play again?\n Enter yes or no");

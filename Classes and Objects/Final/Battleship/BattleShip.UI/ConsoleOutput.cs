@@ -15,16 +15,18 @@ namespace BattleShip.UI
             Console.ReadKey();
         }
 
-        public static void PlayerStartPrompt(int playerNumber)
+        public static void PlayerStartPrompt(string playerName)
         {
             Console.Clear();
-            Console.WriteLine($"Player {playerNumber}, press any key to begin building your player board.");
+            Console.WriteLine($"{playerName}, press any key to begin building your player board.");
+            Console.ReadKey();
         }
 
-        public static void PlayerTurnPrompt(int playerNumber)
+        public static void PlayerTurnPrompt(string playerName)
         {
             Console.Clear();
-            Console.WriteLine($"Player {playerNumber}, press any key to start turn.");
+            Console.WriteLine($"{playerName}, press any key to start turn.");
+            Console.ReadKey();
         }
 
         //Invalid, Duplicate, Miss, Hit, HitAndSunk, Victory
@@ -38,13 +40,13 @@ namespace BattleShip.UI
                 Console.WriteLine("You've already shot there, please try again");
             } else if (response.ShotStatus == ShotStatus.Miss)
             {
-                Console.WriteLine("You've already shot there, please try again");
+                Console.WriteLine("You Missed!");
             } else if (response.ShotStatus == ShotStatus.Hit)
             {
-                Console.WriteLine("You've already shot there, please try again");
+                Console.WriteLine("Their Battleship was hit!");
             } else if (response.ShotStatus == ShotStatus.HitAndSunk)
             {
-                Console.WriteLine("You've already shot there, please try again");
+                Console.WriteLine("You Sunk their battleship!");
             } else if (response.ShotStatus == ShotStatus.Victory)
             {
                 Console.WriteLine("You Are Victorious!");
