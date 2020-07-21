@@ -8,7 +8,7 @@ namespace BattleShip.UI
 {
     public class ConsoleOutput
     {
-        public void Welcome()
+        public static void Welcome()
         {
             Console.WriteLine("Welcome to battle ship!  Press any key to start");
             Console.ReadKey();

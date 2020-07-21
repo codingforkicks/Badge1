@@ -35,7 +35,7 @@ namespace BattleShip.UI
         }
 
         //validates coordinates
-        public bool isValid(string coordinates)
+        public static bool isValid(string coordinates)
         {
             //check if length of input is correct length
             if (coordinates.Length < 1 || coordinates.Length > 2)
@@ -58,7 +58,7 @@ namespace BattleShip.UI
         }
 
         //gets player coordinates
-        public string GetCordinates()
+        public static string GetCoordinates()
         {
             string coordinates;
             while (true)
@@ -71,7 +71,7 @@ namespace BattleShip.UI
                 } else
                 {
                     Console.Clear();
-                    Console.WriteLine("Invalid Coordinates!");
+                    Console.WriteLine("Invalid Coordinates!\n Coordinates must contain a letter A-J followed by a number 1-10\n\n");
                 }
 
             }
