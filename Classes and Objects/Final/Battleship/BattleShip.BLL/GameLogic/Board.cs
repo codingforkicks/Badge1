@@ -246,5 +246,9 @@ namespace BattleShip.BLL.GameLogic
 
             return false;
         }
+        public Dictionary<Coordinate, ShotHistory> GetShotHistory()
+        {
+            return this.ShotHistory;
+        }
     }
 }

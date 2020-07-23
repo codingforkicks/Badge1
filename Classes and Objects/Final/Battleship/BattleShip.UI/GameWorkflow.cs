@@ -41,10 +41,10 @@ namespace BattleShip.UI
             }
         }
 
-        /*Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.
-        public void ShowGrid(Board playerBoard)
+        /*Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.*/
+        public void ShowGrid(Dictionary<Coordinate, ShotHistory> shotHistory)
         {
-            foreach(var shot in playerBoard.ShotHistory)
+            foreach(var shot in shotHistory)
             {
                 Console.WriteLine($"key {shot.Key} value {shot.Value}");
                 if (shot.Value == ShotHistory.Unknown)
@@ -66,15 +66,6 @@ namespace BattleShip.UI
                 }
             }
         }
-        */
-        /*
-         * A player's turn is as follows:
-        Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.
-        Prompt the user for a coordinate entry (ex: B10).
-        Validate the entry; if valid, create a coordinate object, convert the letter to a number, and call the opponent board's FireShot() method.
-        Retrieve the response from the FireShot method and display an appropriate message to the user.
-        Reme
-         */
 
         public void PlayGame()
         {
@@ -89,38 +80,36 @@ namespace BattleShip.UI
                 string currentPlayer = playerlist[startingPlayer];
             
                 //run game setup
-                SetupWorkflow player1 = new SetupWorkflow();
-                SetupWorkflow player2 = new SetupWorkflow();
+                SetupWorkflow gameBoard = new SetupWorkflow();
                 Board player1Board;
                 Board player2Board;
 
                 if(currentPlayer == playerlist[0])
                 {
                     ConsoleOutput.PlayerStartPrompt(playerlist[0]);
-                    player1Board = player1.GameSetUp();
+                    player1Board = gameBoard.GameSetUp();
                     ConsoleOutput.PlayerStartPrompt(playerlist[1]);
-                    player2Board = player2.GameSetUp();
+                    player2Board = gameBoard.GameSetUp();
                 } else
                 {
                     ConsoleOutput.PlayerStartPrompt(playerlist[1]);
-                    player2Board = player2.GameSetUp();
+                    player2Board = gameBoard.GameSetUp();
                     ConsoleOutput.PlayerStartPrompt(playerlist[0]);
-                    player1Board = player1.GameSetUp();
+                    player1Board = gameBoard.GameSetUp();
                 }
 
                 bool winnerFound = false;
                 while (winnerFound == false)
                 {
-                    /*Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.
+                    /*Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.*/
                     if (currentPlayer == playerlist[0])
                     {
-                        ShowGrid(player1Board);
+                        ShowGrid(player1Board.GetShotHistory());
                     }
                     else
                     {
-                        ShowGrid(player2Board);
+                        ShowGrid(player2Board.GetShotHistory());
                     }
-                    */
 
                     //Prompt the user for a coordinate entry (ex: B10). Validate the entry; if valid, create a coordinate object, convert the letter to a number, and call the opponent board's FireShot() method.
                     Coordinate shot = GetShotCoordinates(currentPlayer);
