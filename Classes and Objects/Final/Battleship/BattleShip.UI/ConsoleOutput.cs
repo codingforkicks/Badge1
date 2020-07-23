@@ -25,7 +25,7 @@ namespace BattleShip.UI
 
         public static void PlayerTurnPrompt(string playerName)
         {
-            Console.Clear();
+            //Console.Clear();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Player {playerName}'s Turn");
             Console.ResetColor();
@@ -68,7 +68,7 @@ namespace BattleShip.UI
                 Console.ReadKey();
             } else if (response.ShotStatus == ShotStatus.HitAndSunk)
             {
-                Console.WriteLine("You Sunk their battleship!");
+                Console.WriteLine($"You Sunk their {response.ShipImpacted} battleship!");
                 Console.ReadKey();
             } else if (response.ShotStatus == ShotStatus.Victory)
             {

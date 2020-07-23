@@ -41,28 +41,39 @@ namespace BattleShip.UI
             }
         }
 
+        //converts coordinates back to orginal string
+        public string CoordinatesToString(Coordinate coordinates)
+        {
+            const string letters = "ABCDEFGHIJ";
+
+            string coordinateAsString = letters[coordinates.XCoordinate - 1] + coordinates.YCoordinate.ToString();
+
+            return coordinateAsString;
+        }
+
+
+
         /*Show a grid with marks from the their board's shot history. Place a yellow M in a coordinate if a shot has been fired and missed at that location or a red H if a shot has been fired that has hit.*/
         public void ShowGrid(Dictionary<Coordinate, ShotHistory> shotHistory)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Shot History: ");
+            Console.ResetColor();
+            
             foreach(var shot in shotHistory)
             {
-                Console.WriteLine($"key {shot.Key} value {shot.Value}");
-                if (shot.Value == ShotHistory.Unknown)
+                if (shot.Value == ShotHistory.Hit)
                 {
-                    Console.WriteLine("_");
-                } else if (shot.Value == ShotHistory.Hit)
-                {
+                    Console.Write($"{CoordinatesToString(shot.Key)}: ");
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(" H ");
                     Console.ResetColor();
                 } else if (shot.Value == ShotHistory.Miss)
                 {
+                    Console.Write($"{CoordinatesToString(shot.Key)}: ");
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine(" M ");
                     Console.ResetColor();
-                }
-                if (shot.Key.YCoordinate == 10) { 
-                    Console.WriteLine("\n");
                 }
             }
         }
@@ -111,7 +122,7 @@ namespace BattleShip.UI
                         ShowGrid(player2Board.GetShotHistory());
                     }
 
-                    //Prompt the user for a coordinate entry (ex: B10). Validate the entry; if valid, create a coordinate object, convert the letter to a number, and call the opponent board's FireShot() method.
+                   //Prompt the user for a coordinate entry (ex: B10). Validate the entry; if valid, create a coordinate object, convert the letter to a number, and call the opponent board's FireShot() method.
                     Coordinate shot = GetShotCoordinates(currentPlayer);
                     FireShotResponse response;
 
